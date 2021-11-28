@@ -1,0 +1,13 @@
+kafka:
+  peopleflow:
+    topic: peopleflow
+server:
+  port: 8081
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
+      client-id: Producer
+      retries: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

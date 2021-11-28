@@ -1,0 +1,28 @@
+server:
+  port: 8082
+kafka:
+  peopleflow:
+    topic: peopleflow
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    initialization-mode: always
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/peopleflow
+    username: test
+    password: test
+  kafka:
+    bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
+    consumer:
+      auto-offset-reset: latest
+      group-id: Consumer
+      max-poll-records: 1
+      client-id: Consumer
+      properties:
+        spring.json.trusted.packages: com.peopleflow.consumer
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+
+
